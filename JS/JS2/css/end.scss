@@ -3,6 +3,7 @@ html {
   height: 100%;
   body {
     height: 100%;
+    overflow: auto;
     header {
       border-bottom: 1px solid #74d4eb;
       .header-left {
@@ -30,7 +31,7 @@ html {
         p {
           margin: 0;
           color: white;
-          font-size: 1.5rem;
+          font-size: 2rem;
           line-height: 14.5rem;
         }
       }
@@ -47,6 +48,26 @@ html {
           font-size: 1.5rem;
         }
       }
+    }
+    #list {
+    .record {
+      padding: 0 10% 1rem;
+      border-bottom: 1px solid #8c8c8c;
+      }
+      p {
+        margin: 0 0 5px;
+      }
+      .today {
+        font-size: 1.2rem;
+        margin: 5px 0 0.8rem;
+      }
+      .log {
+        color: #8c8c8c;
+        font-size: 1rem;
+      }
+    }
+    .pillar {
+      height: 5rem;
     }
     footer {
       width: 100%;

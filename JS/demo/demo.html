@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="demoApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="bootstrap/bootstrap.min.css">
+    <style>
+        .menu-list:hover {
+            background: lightblue;
+        }
+        .menu-child-list:hover {
+            background: lightblue;
+        }
+        .listhide {
+            display: none;
+        }
+        .listshow {
+            display: block;
+        }
+        .atcolor {
+            background-color: lightblue;
+        }
+    </style>
+</head>
+<body>
+<div ng-controller="demoCtrl">
+    <div class="list-group">
+        <div ng-repeat="item in sidedata">
+            <label class="menu-list list-group-item" ng-init="index=$index" ng-click="flick(index)">
+                <div class="glyphicon glyphicon-wrench"></div>
+                <span>{{item.x}}</span>
+            </label>
+            <div class="listhide" ng-class="{listshow:atflick==index}">
+                <div class="menu-child-list"
+                     ng-class="{atcolor:atlight==x}"
+                     ng-repeat="x in item.y"
+                     ng-click="clickstate(x)">
+                    <span>{{x}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="angular.min/angular.min.js"></script>
+<script src="jquery/jquery-3.3.1.js"></script>
+<script src="bootstrap/bootstrap.min.js"></script>
+<script src="app.js"></script>
+<script src="factory.js"></script>
+</body>
+</html>

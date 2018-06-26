@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="./Angular/angular.min.js"></script>
+    <script src="./Angular/angular-route.min.js"></script>
+</head>
+
+<body ng-app="App">
+
+    <h1>AngularJS 路由应用</h1>
+    <ul>
+        <li>
+            <a href="#/">首页</a>
+        </li>
+        <li>
+            <a href="#/a">载入</a>
+        </li>
+    </ul>
+    <div ng-view></div>
+
+    <script>
+        var app = angular.module('App', ['ngRoute']);
+        app.config(function ($routeProvider) {
+            // $routeProvider
+            //     .when('/', {
+            //         template:'这是首页页面'
+            //     })
+            //     .when('/b', {
+            //         templateUrl:'03.html'
+            //     })
+            //     .otherwise({
+            //         redirectTo:'/'
+            //     });
+            $routeProvider
+                .when('/', {
+                    template: '这是首页页面'
+                })
+                .when('/a', {
+                    templateUrl: '03.html',
+                    controller: 'MainCtrl'
+                })
+                .otherwise({
+                    redirectTo: '/'
+                });
+        });
+    </script>
+</body>
+
+</html>

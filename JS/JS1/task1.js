@@ -6,6 +6,7 @@ function go() {
         var Rand = Math.random();
         return(Min + Math.round(Rand * Range));
     }
+    //随机获取三个格子
     for(i=0;i<9;i++){
         var num1 = GetRandomNum(0,8);
         var num2 = GetRandomNum(0,8);
@@ -18,12 +19,14 @@ function go() {
     for(j=0;j<node.length;j++){
         node[j].style.background = "orange";
     }
+    //随机颜色
     function bg1() {
         var r = Math.floor(Math.random()*256);
         var g = Math.floor(Math.random()*256);
         var b = Math.floor(Math.random()*256);
         return "rgb("+r+','+g+','+b+")";
     }
+    //把随机的颜色赋值给随机出来的三个格子
     node[num1].style.background = bg1();
     node[num2].style.background = bg1();
     node[num3].style.background = bg1();

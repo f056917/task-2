@@ -5,22 +5,28 @@
 html {
   height: 100%;
   body {
-    height: 100%;
+    min-height: 100%;
+    overflow: auto;
     main {
       height: 100%;
       margin-top: 3rem;
-      padding: 1rem 1rem 6rem;
+      padding: 1rem 1rem 10rem;
       background: #f7f7f7;
-      div {
-        width: 100%;
-        background: white;
-      }
-      .day {
+      .log {
         height: 3rem;
         line-height: 3rem;
         text-align: center;
         color: #29bde0;
         font-size: 1rem;
+        cursor: pointer;
+        background: white;
+        margin-bottom: 1rem;
+      }
+      .day {
+        @extend .log;
+      }
+      .days {
+        @extend .log;
       }
       .triangle {
         width: 0;
@@ -58,6 +64,9 @@ html {
             color: white;
             cursor: pointer;
           }
+          .die{
+            background: #18758D;
+          }
         }
       }
       .shadow {
@@ -72,7 +81,7 @@ html {
       .dialog {
         display: none;
         position: absolute;
-        top: 50%;
+        bottom: 50%;
         left: 50%;
         width: 260px;
         height: 150px;
@@ -136,4 +145,8 @@ html {
     }
   }
 }
-
+#record {
+  #list{
+    display: none;
+  }
+}

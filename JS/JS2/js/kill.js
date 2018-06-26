@@ -1,67 +1,135 @@
-var k = sessionStorage.getItem('killNum');
-var p = sessionStorage.getItem('peopleNum');
-var killMan = sessionStorage.getItem('killer');
+s = sessionStorage.totalArr;
+totalArr = JSON.parse(s);
+
+var killNum = parseInt(sessionStorage.getItem('killNum'));
+var peopleNum = parseInt(sessionStorage.getItem('peopleNum'));
+var k = killNum;
+var p = peopleNum;
+var isKill = parseInt(sessionStorage.getItem('isKill'));
+console.log(isKill);
+var Index;
+var dieNum = null;
+var dieList = null;
 console.log(k);
 console.log(p);
-console.log(killMan);
 
+
+
+var title = sessionStorage.getItem('title');
+var killMan = sessionStorage.getItem('killer');
+var kill = document.getElementById('kill');
+kill.innerHTML = title;
 var x = document.getElementById('killMan');
 x.innerHTML = killMan;
 
-s = sessionStorage.totalArr;
-totalArr = JSON.parse(s);
-console.log(totalArr);
-var main = document.getElementById("main");
-var n = 0;
-
-function init() {
-    createNewNode();
+if(sessionStorage.getItem('dieNum')){
+    dieNum=JSON.parse(sessionStorage.getItem('dieNum'));
+}else {
+    dieNum=[]
 }
-window.onload = init;
-function createNewNode() {
-    for(i=0; i<totalArr.length; i++){
-        var newDivNode = document.createElement("div");
-        main.appendChild(newDivNode);
-        newDivNode.setAttribute("id", "newId"+i);
-        var idd = newDivNode.getAttribute("id");
+if(sessionStorage.getItem('dieList')){
+    dieList=JSON.parse(sessionStorage.getItem('dieList'));
+}else {
+    dieList=[]
+}
+if(sessionStorage.getItem('K')){
+    k=JSON.parse(sessionStorage.getItem('K'));
+}else {
+    k=killNum;
+}
+if(sessionStorage.getItem('P')){
+    p=JSON.parse(sessionStorage.getItem('P'));
+}else {
+    p=peopleNum;
+}
 
-        newDivNode.style.width = "23.3%";
-        newDivNode.style.border = "3px solid white";
-        newDivNode.style.float = "left";
-        newDivNode.style.margin = "0 5% 8%";
-        newDivNode.style.boxSizing = "border-box";
-        newDivNode.style.fontSize = "1.2rem";
-        newDivNode.style.textAlign = "center";
+//存储已死亡玩家的数组
+sessionStorage.setItem('dieNum',JSON.stringify(dieNum));
 
-        var newId = document.getElementById("newId"+i);
-        var a = document.createElement("div");
-        newId.appendChild(a);
-        a.setAttribute("id", "casting"+i);
-        var ibb = a.getAttribute("id");
-        a.style.padding = "23% 20%";
-        a.style.background = "#f5c97b";
+var container=[];
+var identity;
+for (var i = 0; i < totalArr.length; i++) {
+    identity = '<div class="newClass">' + '<div class="casting">' + totalArr[i] +
+        '</div>' + '<div class="num">' + (i + 1) + "号" + '</div>' + '</div>';
+    container.push(identity);
+}
+document.getElementById("diary").innerHTML=container.join('');
 
-        var b = document.createElement("div");
-        newId.appendChild(b);
-        b.setAttribute("id", "num"+i);
-        var icc = b.getAttribute("id");
-        b.style.padding = "0 20%";
-        b.style.background = "#83b09a";
+$(document).ready(function () {
+    $(".newClass").click(function () {
+        var people = $(this).find(".casting").text();
+        var index = $(this).index();
+        Index = index;
+        var D = $(this).find(".casting").css("background-color");
 
-        document.getElementById("casting"+i).innerHTML = totalArr[n];
-        document.getElementById("num"+i).innerHTML = n+1+"号";
-        n++;
+        if(D === "rgb(140, 140, 140)"){
+            alert("亡者已逝,请杀活着的玩家");
+            $('.casting').removeClass("down");
+        }else {
+            if(isKill === 1){
+                if(people === "杀手"){
+                    alert("队长!别开枪!!是我!!!");
+                    $('.casting').removeClass("down");
+                    Index = null;
+                }else {
+                    $(".casting").removeClass("down");
+                    $(this).find('.casting').addClass('down');
+                }
+            }else {
+                $(".casting").removeClass("down");
+                $(this).find('.casting').addClass('down');
+            }
+        }
+    })
+});
 
+
+function rendar() {
+    for(var k=0; k<totalArr.length; k++){
+        for(var r=0; r<dieNum.length; r++){
+            if(dieNum[r]===k){
+                $('.casting').eq(k).addClass('down1')
+            }
+        }
     }
 }
+rendar();
 
 
+$("#startGame").click(function () {
+    if(totalArr[Index]==="平民"){
+        p--;
+        sessionStorage.setItem('P',p);
+    }
+    if(totalArr[Index]==="杀手") {
+        k--;
+        sessionStorage.setItem('K', k);
+    }
+        if(p === k){
+            alert("杀手胜利");
+            sessionStorage.setItem('victory',"杀手胜利");
+            sessionStorage.setItem('win',0);
+            location.href = "end.html";
+        }else if(k===0){
+            alert("平民胜利");
+            sessionStorage.setItem('victory',"平民胜利");
+            location.href = "end.html";
+        }else if(Index==null){
+            alert("风过留声,雁过留影!请壮士杀完人再走!!");
+            return dieNum;
+        }else location.href = "game.html";
 
-
+    dieNum.push(Index);
+    dieList.push((Index+1)+"号"+totalArr[Index]);
+    sessionStorage.setItem('dieNum',JSON.stringify(dieNum));
+    sessionStorage.setItem('dieList',JSON.stringify(dieList));
+});
+console.log(k);
+console.log(p);
+sessionStorage.setItem('killer', k);
+sessionStorage.setItem('gamePlay', p);
 function finish() {
     alert("");
     window.location.href = "home.html";
 }
-function startGame() {
-    window.location.href = "game.html";
-}
+

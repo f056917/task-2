@@ -5,6 +5,7 @@
     <title>Game</title>
     <link rel="stylesheet" href="../css/task.css">
     <link rel="stylesheet" href="../css/game.css">
+    <script src="../js/jquery-3.3.1.js"></script>
 </head>
 <body>
 <header>
@@ -13,28 +14,29 @@
     <div class="header-right" onclick="home()"></div>
 </header>
 <main>
-    <div class="day">第1天</div>
+    <div id="record"></div>
+    <div id="days" class="days"></div>
     <div class="triangle"></div>
     <div class="processes">
         <div class="step">
             <img src="../images/night.png">
             <div class="trigon"></div>
-            <div class="proceed" id="kill" onclick="kill()">杀手杀人</div>
+            <div id="kill" class="proceed" onclick="kill()">杀手杀人</div>
         </div>
         <div class="step">
             <img src="../images/day.png">
             <div class="trigon"></div>
-            <div class="proceed" onclick="ghost()">亡灵发表遗言</div>
+            <div id="ghost" class="proceed" onclick="ghost()">亡灵发表遗言</div>
         </div>
         <div class="step">
             <img src="../images/day.png">
             <div class="trigon"></div>
-            <div class="proceed" onclick="player()">玩家依次发言</div>
+            <div id="player" class="proceed" onclick="player()">玩家依次发言</div>
         </div>
         <div class="step">
             <img src="../images/day.png">
             <div class="trigon"></div>
-            <div class="proceed" onclick="vote()">全民投票</div>
+            <div id="vote" class="proceed" onclick="vote()">全民投票</div>
         </div>
     </div>
     <div class="shadow" id="shade"></div>
@@ -51,6 +53,7 @@
     <button class="footer-left" onclick="finish()">结束游戏</button>
     <button class="footer-right" onclick="judge()">法官日志</button>
 </footer>
+<script src="../js/state-machine.js"></script>
 <script src="../js/task.js"></script>
 <script src="../js/game.js"></script>
 </body>
